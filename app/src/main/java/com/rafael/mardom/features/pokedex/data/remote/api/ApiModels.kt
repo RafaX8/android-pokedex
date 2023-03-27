@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName
 data class PokemonApiModel(
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
-    @SerializedName("species") val description: List<PokemonEntryApiModel>,
     @SerializedName("height") val height: Double,
     @SerializedName("weight") val weight: Double,
     @SerializedName("types") val types: List<PokemonTypesApiModel>,

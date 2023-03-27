@@ -4,10 +4,10 @@ import com.rafael.mardom.features.pokedex.domain.Pokemon
 import com.rafael.mardom.features.pokedex.domain.PokemonSprite
 import com.rafael.mardom.features.pokedex.domain.PokemonStats
 
-fun PokemonApiModel.toDomain() = Pokemon(
+fun PokemonApiModel.toDomain(description: PokemonEntryApiModel) = Pokemon(
     id = this.id,
     name = this.name,
-    description = this.description[0].toDomain(),
+    description = description.toDomain(),
     height = this.height,
     weight = this.weight,
     types = this.types.map {
