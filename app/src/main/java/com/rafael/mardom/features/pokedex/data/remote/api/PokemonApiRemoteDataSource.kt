@@ -1,6 +1,5 @@
 package com.rafael.mardom.features.pokedex.data.remote.api
 
-import android.util.Log
 import com.rafael.mardom.app.data.apiCall
 import com.rafael.mardom.app.domain.ErrorApp
 import com.rafael.mardom.app.domain.functional.Either
@@ -20,7 +19,6 @@ class PokemonApiRemoteDataSource @Inject constructor(
         val pokedex = mutableListOf<Pokemon>()
         return try {
             for (num in 1..pokemonNumber) {
-                Log.d("@dev", "$num")
                 val pokemon = getById(num).get()
                 pokedex.add(pokemon)
             }
