@@ -1,5 +1,7 @@
 package com.rafael.mardom.features.pokedex.di
 
+import com.rafael.mardom.app.data.db.AppDataBase
+import com.rafael.mardom.features.pokedex.data.local.db.PokemonDao
 import com.rafael.mardom.features.pokedex.data.remote.api.ApiEndPoints
 import dagger.Module
 import dagger.Provides
@@ -17,4 +19,9 @@ object PokemonProvidesModule {
     fun providesPokemonApiEndPoints(retrofit: Retrofit) : ApiEndPoints =
         retrofit.create(ApiEndPoints::class.java)
 
+    @Provides
+    @Singleton
+    fun providePokemonDao(appDatabase: AppDataBase): PokemonDao {
+        return appDatabase.pokemonDao()
+    }
 }

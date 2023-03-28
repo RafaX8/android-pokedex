@@ -1,6 +1,8 @@
 package com.rafael.mardom.features.pokedex.di
 
 import com.rafael.mardom.features.pokedex.data.PokemonDataRepository
+import com.rafael.mardom.features.pokedex.data.local.PokemonLocalDataSource
+import com.rafael.mardom.features.pokedex.data.local.db.PokemonDbLocalDataSource
 import com.rafael.mardom.features.pokedex.data.remote.PokemonRemoteDataSource
 import com.rafael.mardom.features.pokedex.data.remote.api.PokemonApiRemoteDataSource
 import com.rafael.mardom.features.pokedex.domain.PokemonRepository
@@ -19,4 +21,6 @@ abstract class PokemonModule {
     @Binds
     abstract fun bindPokemonRemoteApiDataSource(remoteSource: PokemonApiRemoteDataSource): PokemonRemoteDataSource
 
+    @Binds
+    abstract fun bindPokemonDbLocalDataSource(localSource: PokemonDbLocalDataSource): PokemonLocalDataSource
 }
