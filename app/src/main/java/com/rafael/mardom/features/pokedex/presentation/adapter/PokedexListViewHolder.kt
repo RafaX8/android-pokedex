@@ -16,7 +16,7 @@ class PokedexListViewHolder(private val view: View) : RecyclerView.ViewHolder(vi
         binding.pokemonName.text = pokemon.name
         binding.pokemonSprite.loadUrl(pokemon.sprite)
         binding.pokemonTyping1.text = pokemon.types[0]
-        if (pokemon.types.size > 1) binding.pokemonTyping2.text = pokemon.types[1] else ""
+        binding.pokemonTyping2.text = if (pokemon.types.size > 1) pokemon.types[1] else ""
         view.setOnClickListener {
             itemClick?.invoke(pokemon.id)
         }
