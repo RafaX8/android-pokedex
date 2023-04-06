@@ -21,11 +21,11 @@
         android:name="com.rafael.mardom.features.pokedex.presentation.PokemonDetailFragment"
         tools:layout="@layout/fragment_pokemon_detail">
 
-    <argument
-        android:name="pokemonId"
-        android:defaultValue="0"
-        app:argType="integer"
-        app:nullable="false" />
+        <argument
+            android:name="pokemonId"
+            android:defaultValue="0"
+            app:argType="integer"
+            app:nullable="false" />
 
     </fragment>
 
