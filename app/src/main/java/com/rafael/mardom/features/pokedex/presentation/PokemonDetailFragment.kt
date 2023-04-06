@@ -69,6 +69,8 @@ class PokemonDetailFragment : Fragment() {
             pokemonHeight.text = model.height.toString()
             pokemonWeight.text = model.weight.toString()
             pokemonSprite.loadUrl(model.sprites.front_default)
+            pokemonType1.text = model.types[0]
+            pokemonType2.text = if (model.types.size > 1) model.types[1] else ""
 
             toolbar.apply {
                 title = "# ${model.id}  - ${model.name.uppercase()}"
