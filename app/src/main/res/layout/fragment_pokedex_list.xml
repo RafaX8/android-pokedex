@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.pokedex.presentation.PokedexListFragment"
-    android:background="@color/cardview_light_background">
+    tools:context=".features.pokedex.presentation.PokedexListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pokedex_list"

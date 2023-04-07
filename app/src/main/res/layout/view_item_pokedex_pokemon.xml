@@ -4,20 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    app:cardBackgroundColor="@color/md_theme_light_secondary"
+    android:layout_marginHorizontal="24dp"
+    android:layout_marginVertical="8dp"
     android:padding="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@color/md_theme_light_primaryContainer"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp">
+        android:background="@color/md_theme_light_secondary"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/pokeball_shape"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/pokedex_item_poke_shape"
+            app:layout_constraintStart_toStartOf="@id/pokemon_sprite"
+            app:layout_constraintEnd_toEndOf="@id/pokemon_sprite"
+            app:layout_constraintTop_toTopOf="@id/pokemon_sprite"
+            app:layout_constraintBottom_toBottomOf="@id/pokemon_sprite"/>
 
         <ImageView
             android:id="@+id/pokemon_sprite"
             android:layout_width="@dimen/pokedex_sprite_size"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/pokedex_sprite_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -28,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:textColor="@color/md_theme_light_onPrimaryContainer"
+            android:textColor="@color/md_theme_light_onSecondary"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/pokemon_sprite"
@@ -42,8 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:textAllCaps="true"
+            android:textColor="@color/md_theme_light_onSecondary"
             android:textSize="20sp"
-            android:textColor="@color/md_theme_light_onPrimaryContainer"
 
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/pokemon_id"
