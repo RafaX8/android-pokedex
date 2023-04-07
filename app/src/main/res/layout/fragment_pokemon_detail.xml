@@ -10,22 +10,41 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:background="@color/md_theme_light_secondary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_arrow_back"
-        app:title="aaa"
-        app:titleCentered="true">
+        app:navigationIconTint="@color/md_theme_light_onSecondary"
+        app:titleCentered="true"
+        app:titleTextColor="@color/md_theme_light_onSecondary"
+        tools:title="PIKACHU">
 
-        <ImageView
-            android:id="@+id/toolbar_sprite"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginEnd="12dp"
-            tools:src="@tools:sample/avatars" />
+            android:layout_marginEnd="12dp">
 
+            <ImageView
+                android:id="@+id/pokeball_shape"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/pokedex_item_poke_shape"
+                app:layout_constraintBottom_toBottomOf="@id/toolbar_sprite"
+                app:layout_constraintEnd_toEndOf="@id/toolbar_sprite"
+                app:layout_constraintStart_toStartOf="@id/toolbar_sprite"
+                app:layout_constraintTop_toTopOf="@id/toolbar_sprite" />
+
+            <ImageView
+                android:id="@+id/toolbar_sprite"
+                android:layout_width="@dimen/pokedex_sprite_size"
+                android:layout_height="@dimen/pokedex_sprite_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.MaterialToolbar>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/data"
@@ -44,36 +63,60 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
+        <!-- Pokemon Description -->
+        <TextView
+            android:id="@+id/pokemon_description_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DESCRIPTION:"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/pokemon_description"
+            app:layout_constraintStart_toStartOf="@id/pokemon_description" />
+
         <!-- Pokemon Types -->
         <TextView
             android:id="@+id/pokemon_type1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@id/pokemon_type2"
-            app:layout_constraintStart_toEndOf="@id/pokemon_sprite"
-            app:layout_constraintTop_toTopOf="@id/pokemon_sprite"
-            tools:text="aaaa" />
+            android:background="@drawable/type_brick_shape"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/pokemon_sprite"
+            app:layout_constraintStart_toStartOf="@id/pokemon_sprite"
+            app:layout_constraintEnd_toEndOf="@id/pokemon_sprite"
+            tools:backgroundTint="@color/md_theme_light_primary"
+            tools:text="TYPE 1" />
 
         <TextView
             android:id="@+id/pokemon_type2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/pokemon_type1"
-            app:layout_constraintTop_toTopOf="@id/pokemon_type1"
-            tools:text="aaaa" />
-
-        <!-- Pokemon Description -->
-        <TextView
-            android:id="@+id/pokemon_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="12dp"
+            android:background="@drawable/type_brick_shape"
             android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/pokemon_type1"
+            app:layout_constraintTop_toBottomOf="@id/pokemon_type1"
+            tools:backgroundTint="@color/md_theme_dark_primary"
+            tools:text="TYPE 2" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/pokemon_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginVertical="12dp"
+            android:background="@color/md_theme_light_secondaryContainer"
+            android:textAlignment="center"
+            android:textColor="@color/md_theme_light_onSecondaryContainer"
+            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/pokemon_sprite"
-            app:layout_constraintTop_toBottomOf="@id/pokemon_type1"
-            tools:text="aaaa" />
+            app:layout_constraintTop_toBottomOf="@id/pokemon_description_label"
+            tools:text="Lorem ipsum dolor sit amet consectetur adipiscing elit class donec nunc semper quisque facilisi, risus mattis condimentum facilisis duis eros libero ornare netus himenaeos porta turpis. Eleifend hac sollicitudin primis vehicula montes diam aptent nisl non, interdum ac condimentum per rhoncus proin magnis. Blandit viverra nostra ullamcorper habitant inceptos, rhoncus non pellentesque odio dui luctus, mus at porta commodo." />
 
         <!-- Pokemon Height -->
         <TextView
@@ -83,7 +126,7 @@
             app:layout_constraintEnd_toStartOf="@id/pokemon_weight"
             app:layout_constraintStart_toEndOf="@id/pokemon_sprite"
             app:layout_constraintTop_toBottomOf="@id/pokemon_description"
-            tools:text="aaaa" />
+            tools:text="HEIGHT" />
 
         <!-- Pokemon Weight -->
         <TextView
@@ -93,7 +136,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/pokemon_height"
             app:layout_constraintTop_toTopOf="@id/pokemon_height"
-            tools:text="aaaa" />
+            tools:text="WEIGHT" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Pokemon Stats -->
@@ -101,9 +144,9 @@
         android:id="@+id/stats_chart"
         android:layout_width="0dp"
         android:layout_height="150dp"
+        android:layout_margin="24dp"
         android:background="@color/teal_200"
         android:padding="24dp"
-        android:layout_margin="24dp"
         app:chart_axis="y"
         app:chart_barsBackgroundColor="@color/white"
         app:chart_barsColor="@color/black"
