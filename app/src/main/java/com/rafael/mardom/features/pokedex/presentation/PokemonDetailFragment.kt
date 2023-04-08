@@ -142,7 +142,6 @@ class PokemonDetailFragment : Fragment() {
         chartSet.reverse()
 
         binding?.apply {
-            statsChart.labels
             statsChart.barRadius = 12F
             statsChart.spacing = 32F
             statsChart.animation.duration = animationDuration
