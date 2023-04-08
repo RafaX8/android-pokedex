@@ -2,7 +2,6 @@ package com.rafael.mardom.features.pokedex.presentation.adapter
 
 import android.view.View
 import android.view.View.*
-import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.rafael.mardom.R
 import com.rafael.mardom.app.extensions.loadUrl
