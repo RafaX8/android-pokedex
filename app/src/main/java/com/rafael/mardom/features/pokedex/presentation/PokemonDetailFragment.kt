@@ -1,5 +1,7 @@
 package com.rafael.mardom.features.pokedex.presentation
 
+import android.annotation.SuppressLint
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -88,10 +90,14 @@ class PokemonDetailFragment : Fragment() {
         )
 
         binding?.apply {
+
             pokemonDescription.text = "\"${model.description}\""
             pokemonHeight.text = model.height.toString()
             pokemonWeight.text = model.weight.toString()
             pokemonSprite.loadUrl(model.sprites.front_default)
+            frontShiny.loadUrl(model.sprites.front_shiny)
+            backDefault.loadUrl(model.sprites.back_default)
+            backShiny.loadUrl(model.sprites.back_shiny)
 
 
             pokemonType1.apply {
@@ -116,7 +122,6 @@ class PokemonDetailFragment : Fragment() {
 
             toolbar.apply {
                 title = "# ${model.id} - ${model.name.uppercase()}"
-                toolbarSprite.loadUrl(model.sprites.front_default)
             }
 
             buildStatsChart(model.stats)
@@ -128,14 +133,21 @@ class PokemonDetailFragment : Fragment() {
 
         val chartSet = mutableListOf<Pair<String, Float>>()
 
-        stats.forEach{
+        var total = 0
+        stats.forEach {
+            total += it.base
             chartSet.add(
-                "${it.base} - ${it.name.uppercase()}" to ((it.base).toFloat()))
+                "${it.base} - ${it.name.uppercase()}" to ((it.base).toFloat())
+            )
         }
+        chartSet.add("$total - STATS TOTAL" to 0F)
 
         chartSet.reverse()
 
         binding?.apply {
+            statsChart.labels
+            statsChart.barRadius = 12F
+            statsChart.spacing = 32F
             statsChart.animation.duration = animationDuration
             statsChart.animate(chartSet)
         }
