@@ -36,31 +36,31 @@ class PokedexListViewHolder(private val view: View) : RecyclerView.ViewHolder(vi
             "fairy" to context.getColor(R.color.fairy),
         )
 
-        binding.pokemonId.text = pokemon.id.toString()
-        binding.pokemonName.text = pokemon.name
-        binding.pokemonSprite.loadUrl(pokemon.sprite)
+        binding.apply {
+            pokemonId.text = pokemon.id.toString()
+            pokemonName.text = pokemon.name
+            pokemonSprite.loadUrl(pokemon.sprite)
 
-
-        binding.pokemonType1.apply {
-            val type1 = pokemon.types[0]
-            text = type1
-            typeColorPair[type1]?.let { color ->
-                background.setTint(color)
-            }
-        }
-        binding.pokemonType2.apply {
-            if (pokemon.types.size > 1) {
-                val type2 = pokemon.types[1]
-                text = type2
-                typeColorPair[type2]?.let { color ->
-                    binding.pokemonType2.background.setTint(color)
+            pokemonType1.apply {
+                val type1 = pokemon.types[0]
+                text = type1
+                typeColorPair[type1]?.let { color ->
+                    background.setTint(color)
                 }
-                visibility = VISIBLE
-            } else {
-                visibility = GONE
+            }
+            pokemonType2.apply {
+                if (pokemon.types.size > 1) {
+                    val type2 = pokemon.types[1]
+                    text = type2
+                    typeColorPair[type2]?.let { color ->
+                        pokemonType2.background.setTint(color)
+                    }
+                    visibility = VISIBLE
+                } else {
+                    visibility = GONE
+                }
             }
         }
-
         view.setOnClickListener {
             itemClick?.invoke(pokemon.id)
         }

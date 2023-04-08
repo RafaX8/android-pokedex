@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Sprites -->
+    <!-- List -->
     <dimen name="pokedex_sprite_size">56dp</dimen>
+    <!-- Detail -->
+    <dimen name="detail_default_sprite_size">192dp</dimen>
+    <dimen name="detail_alter_sprite_size">96dp</dimen>
+
+    <!-- Fonts -->
+    <dimen name="font_small">12sp</dimen>
+    <dimen name="font_medium">16sp</dimen>
+    <dimen name="font_large">20sp</dimen>
+
+    <!-- Spacing -->
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_medium">12dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+
+    <!-- ViewItem -->
+    <dimen name="item_height">96dp</dimen>
+
+    <!-- Stats Chart -->
+    <dimen name="chart_height">192dp</dimen>
 </resources>

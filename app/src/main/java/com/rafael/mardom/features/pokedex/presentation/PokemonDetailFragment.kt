@@ -90,7 +90,6 @@ class PokemonDetailFragment : Fragment() {
         )
 
         binding?.apply {
-
             pokemonDescription.text = "\"${model.description}\""
             pokemonHeight.text = model.height.toString()
             pokemonWeight.text = model.weight.toString()
@@ -98,7 +97,6 @@ class PokemonDetailFragment : Fragment() {
             frontShiny.loadUrl(model.sprites.front_shiny)
             backDefault.loadUrl(model.sprites.back_default)
             backShiny.loadUrl(model.sprites.back_shiny)
-
 
             pokemonType1.apply {
                 val type1 = model.types[0]
@@ -134,6 +132,7 @@ class PokemonDetailFragment : Fragment() {
         val chartSet = mutableListOf<Pair<String, Float>>()
 
         var total = 0
+
         stats.forEach {
             total += it.base
             chartSet.add(
@@ -152,6 +151,4 @@ class PokemonDetailFragment : Fragment() {
             statsChart.animate(chartSet)
         }
     }
-
-
 }

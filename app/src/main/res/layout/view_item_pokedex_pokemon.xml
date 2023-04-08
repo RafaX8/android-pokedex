@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="24dp"
-    android:layout_marginVertical="8dp"
-    android:padding="8dp"
+    android:layout_marginHorizontal="@dimen/spacing_large"
+    android:layout_marginVertical="@dimen/spacing_small"
+    android:padding="@dimen/spacing_small"
     app:cardBackgroundColor="@color/md_theme_light_secondary">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/item_height"
         android:background="@color/md_theme_light_secondary"
-        android:padding="8dp">
+        android:padding="@dimen/spacing_small">
 
+        <!-- Pokemon Sprite -->
         <ImageView
             android:id="@+id/pokeball_shape"
             android:layout_width="0dp"
@@ -34,33 +35,35 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
+        <!-- ID -->
         <TextView
             android:id="@+id/pokemon_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/spacing_small"
             android:textColor="@color/md_theme_light_onSecondary"
-            android:textSize="20sp"
+            android:textSize="@dimen/font_large"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/pokemon_sprite"
             app:layout_constraintStart_toEndOf="@id/pokemon_sprite"
             app:layout_constraintTop_toTopOf="@id/pokemon_sprite"
             tools:text="0000" />
 
+        <!-- Name -->
         <TextView
             android:id="@+id/pokemon_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/spacing_small"
             android:textAllCaps="true"
             android:textColor="@color/md_theme_light_onSecondary"
-            android:textSize="20sp"
-
+            android:textSize="@dimen/font_large"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/pokemon_id"
             app:layout_constraintTop_toTopOf="@id/pokemon_id"
             tools:text="PIKACHU" />
 
+        <!-- Types -->
         <TextView
             android:id="@+id/pokemon_type1"
             android:layout_width="wrap_content"
@@ -69,7 +72,7 @@
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textSize="@dimen/font_small"
             app:layout_constraintBottom_toTopOf="@id/pokemon_type2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -84,7 +87,7 @@
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textSize="@dimen/font_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/pokemon_type1"
             app:layout_constraintTop_toBottomOf="@id/pokemon_type1"

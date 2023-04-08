@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".features.pokedex.presentation.PokemonDetailFragment">
 
+    <!-- Toolbar -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -18,23 +19,24 @@
         app:navigationIconTint="@color/md_theme_light_onPrimary"
         app:titleCentered="true"
         app:titleTextColor="@color/md_theme_light_onSecondary"
-        tools:title="# 0 - PIKACHU">
+        tools:title="# 0 - PIKACHU" />
 
-    </com.google.android.material.appbar.MaterialToolbar>
-
+    <!-- ScrollView -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/spacing_large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
+        <!-- Data -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:padding="@dimen/spacing_medium"
             app:layout_constraintStart_toStartOf="@id/toolbar"
             app:layout_constraintTop_toBottomOf="@id/toolbar">
 
@@ -51,16 +53,17 @@
 
             <ImageView
                 android:id="@+id/pokemon_sprite"
-                android:layout_width="196dp"
-                android:layout_height="196dp"
+                android:layout_width="@dimen/detail_default_sprite_size"
+                android:layout_height="@dimen/detail_default_sprite_size"
                 app:layout_constraintEnd_toStartOf="@id/alt_sprites"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/avatars" />
 
+            <!-- Alternative Sprites -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/alt_sprites"
-                android:layout_width="100dp"
+                android:layout_width="@dimen/detail_alter_sprite_size"
                 android:layout_height="0dp"
                 android:background="@drawable/rounded_corners_shape"
                 android:backgroundTint="@color/md_theme_light_secondary"
@@ -68,7 +71,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/pokemon_sprite"
                 app:layout_constraintTop_toTopOf="@id/pokemon_sprite">
-
 
                 <ImageView
                     android:id="@+id/front_shiny"
@@ -88,7 +90,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/front_shiny"
                     app:layout_constraintTop_toBottomOf="@id/front_shiny"
-
                     tools:src="@tools:sample/avatars" />
 
                 <ImageView
@@ -99,45 +100,47 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/front_shiny"
                     app:layout_constraintTop_toBottomOf="@id/back_default"
-
                     tools:src="@tools:sample/avatars" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <!-- Pokemon Description -->
             <TextView
                 android:id="@+id/pokemon_description_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DESCRIPTION:"
+                android:text="@string/description_label"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/pokemon_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/pokemon_sprite" />
 
-
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/pokemon_description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginVertical="12dp"
+                android:layout_marginVertical="@dimen/spacing_medium"
                 android:background="@drawable/rounded_corners_shape"
                 android:backgroundTint="@color/md_theme_light_secondaryContainer"
-                android:padding="8dp"
+                android:padding="@dimen/spacing_small"
                 android:textAlignment="center"
                 android:textColor="@color/md_theme_light_onSecondaryContainer"
+                android:textSize="@dimen/font_medium"
                 android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/pokemon_description_label"
                 app:layout_constraintTop_toBottomOf="@id/pokemon_description_label"
-                tools:text="Lorem ipsum dolor sit amet consectetur adipiscing elit class donec nunc semper quisque facilisi, risus mattis condimentum facilisis duis eros libero ornare netus himenaeos porta turpis. Eleifend hac sollicitudin primis vehicula montes diam aptent nisl non, interdum ac condimentum per rhoncus proin magnis. Blandit viverra nostra ullamcorper habitant inceptos, rhoncus non pellentesque odio dui luctus, mus at porta commodo." />
+                tools:text="@string/lorem_ipsum" />
 
+            <!-- Height and Weight data -->
             <LinearLayout
                 android:id="@+id/extra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/spacing_small"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/pokemon_description">
+
                 <!-- Pokemon Height -->
                 <ImageView
                     android:layout_width="wrap_content"
@@ -170,12 +173,12 @@
                 android:id="@+id/pokemon_type1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginVertical="@dimen/spacing_medium"
                 android:background="@drawable/type_brick_shape"
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="12sp"
+                android:textSize="@dimen/font_small"
                 app:layout_constraintBottom_toTopOf="@id/stats_chart"
                 app:layout_constraintEnd_toStartOf="@id/pokemon_type2"
                 app:layout_constraintStart_toStartOf="@id/stats_chart"
@@ -191,7 +194,7 @@
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="12sp"
+                android:textSize="@dimen/font_small"
                 app:layout_constraintEnd_toEndOf="@id/stats_chart"
                 app:layout_constraintStart_toEndOf="@id/pokemon_type1"
                 app:layout_constraintTop_toTopOf="@id/pokemon_type1"
@@ -202,20 +205,17 @@
             <com.db.williamchart.view.HorizontalBarChartView
                 android:id="@+id/stats_chart"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_margin="24dp"
+                android:layout_height="@dimen/chart_height"
                 android:background="@drawable/rounded_corners_shape"
                 android:backgroundTint="@color/md_theme_light_secondary"
-                android:padding="24dp"
+                android:padding="@dimen/spacing_large"
                 app:chart_axis="y"
                 app:chart_barsColor="@color/md_theme_dark_tertiary"
                 app:chart_labelsColor="@color/md_theme_light_onSecondary"
-                app:chart_labelsSize="12dp"
+                app:chart_labelsSize="@dimen/font_small"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
