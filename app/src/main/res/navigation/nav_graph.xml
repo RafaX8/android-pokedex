@@ -29,4 +29,48 @@
 
     </fragment>
 
+    <fragment
+        android:id="@+id/data_error_fragment"
+        android:name="com.rafael.mardom.app.presentation.error.DataErrorFragment"
+        tools:layout="@layout/fragment_error" />
+
+    <fragment
+        android:id="@+id/nointernet_error_fragment"
+        android:name="com.rafael.mardom.app.presentation.error.NoInternetErrorFragment"
+        tools:layout="@layout/fragment_error" />
+
+    <fragment
+        android:id="@+id/server_error_fragment"
+        android:name="com.rafael.mardom.app.presentation.error.ServerErrorFragment"
+        tools:layout="@layout/fragment_error" />
+
+    <fragment
+        android:id="@+id/unknown_error_fragment"
+        android:name="com.rafael.mardom.app.presentation.error.UnknownErrorFragment"
+        tools:layout="@layout/fragment_error" />
+
+    <action
+        android:id="@+id/action_to_data_error"
+        app:destination="@id/data_error_fragment"
+        app:popUpTo="@+id/data_error_fragment"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/action_to_nointernet_error"
+        app:destination="@id/nointernet_error_fragment"
+        app:popUpTo="@+id/nointernet_error_fragment"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/action_to_server_error"
+        app:destination="@id/server_error_fragment"
+        app:popUpTo="@+id/server_error_fragment"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/action_to_unknown_error"
+        app:destination="@id/unknown_error_fragment"
+        app:popUpTo="@+id/unknown_error_fragment"
+        app:popUpToInclusive="true" />
+
 </navigation>

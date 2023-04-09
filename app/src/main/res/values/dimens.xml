@@ -22,4 +22,7 @@
 
     <!-- Stats Chart -->
     <dimen name="chart_height">192dp</dimen>
+
+    <!-- Error -->
+    <dimen name="error_icon_height">256dp</dimen>
 </resources>

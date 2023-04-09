@@ -3,4 +3,13 @@
     <string name="action_bar_tittle">Android Pokedex - TFG </string>
     <string name="description_label">DESCRIPTION:</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet consectetur adipiscing elit class donec nunc semper quisque facilisi, risus mattis condimentum facilisis duis eros libero ornare netus himenaeos porta turpis.</string>
+    <!-- Error Handling -->
+    <string name="label_title_no_internet_error">No Internet Connection</string>
+    <string name="label_desc_no_internet_error">Sorry, we can\'t load this page right now. It seems you\'re not connected to the internet.</string>
+
+    <string name="label_title_unknown_error">Unknown Error</string>
+    <string name="label_desc_unknown_error">Something unexpected happened. Please try again and report if the error persists.</string>
+
+    <string name="label_title_server_error">Server Failed</string>
+    <string name="label_desc_server_error">We are sorry we can\'t reach the server right now. Please check your internet connection and try again later.</string>
 </resources>

@@ -9,9 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.rafael.mardom.app.presentation.error.AppErrorHandler
 import com.rafael.mardom.databinding.FragmentPokedexListBinding
 import com.rafael.mardom.features.pokedex.presentation.adapter.PokedexListAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PokedexListFragment : Fragment() {
@@ -19,6 +21,9 @@ class PokedexListFragment : Fragment() {
     private var binding: FragmentPokedexListBinding? = null
     private val pokedexListAdapter = PokedexListAdapter()
     private val viewModel by viewModels<PokedexListViewModel>()
+
+    @Inject
+    lateinit var appErrorHandler: AppErrorHandler
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +60,7 @@ class PokedexListFragment : Fragment() {
     private fun setUpObservers() {
         val state = Observer<PokedexListViewModel.UiState> {
             if (it.error != null) {
-                //TODO
+                appErrorHandler.navigateToError(it.error)
             } else {
                 if (it.isLoading) {
                     //TODO
