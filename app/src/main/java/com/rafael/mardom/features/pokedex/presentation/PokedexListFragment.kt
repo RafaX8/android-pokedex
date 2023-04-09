@@ -9,6 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.faltenreich.skeletonlayout.Skeleton
+import com.faltenreich.skeletonlayout.applySkeleton
+import com.rafael.mardom.R
 import com.rafael.mardom.app.presentation.error.AppErrorHandler
 import com.rafael.mardom.databinding.FragmentPokedexListBinding
 import com.rafael.mardom.features.pokedex.presentation.adapter.PokedexListAdapter
@@ -17,7 +20,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class PokedexListFragment : Fragment() {
-
+    private var skeleton: Skeleton? = null
     private var binding: FragmentPokedexListBinding? = null
     private val pokedexListAdapter = PokedexListAdapter()
     private val viewModel by viewModels<PokedexListViewModel>()
@@ -45,6 +48,7 @@ class PokedexListFragment : Fragment() {
                     LinearLayoutManager.VERTICAL,
                     false
                 )
+                skeleton = applySkeleton(R.layout.view_item_pokedex_pokemon, 9)
             }
             pokedexListAdapter.setOnClickItem { pokemonId ->
                 navigateToDetail(pokemonId)
@@ -60,11 +64,13 @@ class PokedexListFragment : Fragment() {
     private fun setUpObservers() {
         val state = Observer<PokedexListViewModel.UiState> {
             if (it.error != null) {
+                skeleton?.showOriginal()
                 appErrorHandler.navigateToError(it.error)
             } else {
                 if (it.isLoading) {
-                    //TODO
+                    skeleton?.showSkeleton()
                 } else {
+                    skeleton?.showOriginal()
                     pokedexListAdapter.submitList(it.pokedex)
                 }
             }

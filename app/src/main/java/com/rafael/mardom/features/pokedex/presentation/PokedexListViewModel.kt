@@ -59,7 +59,7 @@ class PokedexListViewModel @Inject constructor(
 
     data class UiState(
         val error: ErrorApp? = null,
-        val isLoading: Boolean = false,
+        val isLoading: Boolean = true,
         val pokedex: List<ItemUiState>? = null,
     )
 
