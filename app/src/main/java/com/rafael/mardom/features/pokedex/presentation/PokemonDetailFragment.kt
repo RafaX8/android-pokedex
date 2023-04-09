@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.faltenreich.skeletonlayout.Skeleton
 import com.rafael.mardom.R
 import com.rafael.mardom.app.extensions.loadUrl
 import com.rafael.mardom.app.presentation.error.AppErrorHandler
@@ -19,6 +20,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class PokemonDetailFragment : Fragment() {
+    private var skeleton: Skeleton? = null
     private var binding: FragmentPokemonDetailBinding? = null
     private val viewModel by viewModels<PokemonDetailViewModel>()
     private val args: PokemonDetailFragmentArgs by navArgs()
@@ -43,6 +45,7 @@ class PokemonDetailFragment : Fragment() {
                     findNavController().navigateUp()
                 }
             }
+            skeleton = skeletonDetail
         }
     }
 
@@ -55,11 +58,13 @@ class PokemonDetailFragment : Fragment() {
     private fun setupObservers() {
         val state = Observer<PokemonDetailViewModel.UiState> {
             if (it.error != null) {
+                skeleton?.showOriginal()
                 appErrorHandler.navigateToError(it.error)
             } else {
                 if (it.isLoading) {
-                    // TODO
+                    skeleton?.showSkeleton()
                 } else {
+                    skeleton?.showOriginal()
                     it.pokemon?.let { model ->
                         bind(model)
                     }
