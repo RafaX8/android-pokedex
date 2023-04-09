@@ -11,15 +11,20 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.rafael.mardom.R
 import com.rafael.mardom.app.extensions.loadUrl
+import com.rafael.mardom.app.presentation.error.AppErrorHandler
 import com.rafael.mardom.databinding.FragmentPokemonDetailBinding
 import com.rafael.mardom.features.pokedex.domain.GetPokemonByIdUseCase.*
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PokemonDetailFragment : Fragment() {
     private var binding: FragmentPokemonDetailBinding? = null
     private val viewModel by viewModels<PokemonDetailViewModel>()
     private val args: PokemonDetailFragmentArgs by navArgs()
+
+    @Inject
+    lateinit var appErrorHandler: AppErrorHandler
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,7 +55,7 @@ class PokemonDetailFragment : Fragment() {
     private fun setupObservers() {
         val state = Observer<PokemonDetailViewModel.UiState> {
             if (it.error != null) {
-                // TODO
+                appErrorHandler.navigateToError(it.error)
             } else {
                 if (it.isLoading) {
                     // TODO
