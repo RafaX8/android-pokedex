@@ -14,7 +14,7 @@ class GetAllPokemonUseCase @Inject constructor(
                     id = pokemon.id,
                     name= pokemon.name,
                     types= pokemon.types,
-                    sprite= pokemon.sprites.front_default
+                    sprite= pokemon.sprites.frontDefault
                 )
             }
         }

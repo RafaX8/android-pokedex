@@ -23,10 +23,10 @@ fun PokemonStatsEntity.toDomain() = PokemonStats(
 )
 
 fun PokemonSpriteEntity.toDomain() = PokemonSprite(
-    front_default = this.front_default,
-    front_shiny = this.front_shiny,
-    back_default = this.back_default,
-    back_shiny = this.back_shiny,
+    frontDefault = this.frontDefault,
+    frontShiny = this.frontShiny,
+    backDefault = this.backDefault,
+    backShiny = this.backShiny,
 )
 
 fun Pokemon.toEntity() = PokemonEntity(
@@ -48,8 +48,8 @@ fun PokemonStats.toEntity() = PokemonStatsEntity(
 )
 
 fun PokemonSprite.toEntity() = PokemonSpriteEntity(
-    front_default = this.front_default,
-    front_shiny = this.front_shiny,
-    back_default = this.back_default,
-    back_shiny = this.back_shiny,
+    frontDefault = this.frontDefault,
+    frontShiny = this.frontShiny,
+    backDefault = this.backDefault,
+    backShiny = this.backShiny,
 )

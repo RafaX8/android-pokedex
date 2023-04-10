@@ -37,18 +37,6 @@ class PokemonDbLocalDataSource @Inject constructor(
         }
     }
 
-    override fun getByName(name: String): Either<ErrorApp, Pokemon?> {
-        return try {
-
-            val pokemon = dao.findByName(name)
-
-            pokemon?.toDomain().right()
-
-        } catch (e: java.lang.Exception) {
-            ErrorApp.DataError.left()
-        }
-    }
-
     override fun save(pokedex: List<Pokemon>): Either<ErrorApp, Boolean> {
         return try {
 
@@ -63,7 +51,6 @@ class PokemonDbLocalDataSource @Inject constructor(
         }
     }
 
-    override fun deleteAll() {
-        dao.deleteAll()
-    }
+    override fun deleteAll() = dao.deleteAll()
+
 }
