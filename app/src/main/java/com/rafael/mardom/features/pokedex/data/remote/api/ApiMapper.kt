@@ -1,5 +1,6 @@
 package com.rafael.mardom.features.pokedex.data.remote.api
 
+import com.rafael.mardom.app.domain.functional.Either
 import com.rafael.mardom.features.pokedex.domain.Pokemon
 import com.rafael.mardom.features.pokedex.domain.PokemonSprite
 import com.rafael.mardom.features.pokedex.domain.PokemonStats
@@ -26,8 +27,8 @@ private fun PokemonStatsApiModel.toDomain() = PokemonStats(
     base = this.base
 )
 private fun PokemonSpriteApiModel.toDomain() = PokemonSprite(
-    front_default = this.front_default,
-    front_shiny = this.front_shiny,
-    back_default = this.back_default,
-    back_shiny = this.back_shiny,
+    frontDefault = this.frontDefault,
+    frontShiny = this.frontShiny,
+    backDefault = this.backDefault,
+    backShiny = this.backShiny,
 )

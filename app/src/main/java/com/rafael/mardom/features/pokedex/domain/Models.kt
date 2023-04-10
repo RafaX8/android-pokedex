@@ -17,8 +17,8 @@ data class PokemonStats(
 )
 
 data class PokemonSprite(
-    val front_default: String,
-    val front_shiny: String,
-    val back_default: String,
-    val back_shiny: String,
+    val frontDefault: String,
+    val frontShiny: String,
+    val backDefault: String,
+    val backShiny: String,
 )

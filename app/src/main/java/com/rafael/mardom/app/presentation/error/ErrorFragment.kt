@@ -5,10 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
-import com.rafael.mardom.MainActivity
-import com.rafael.mardom.R
 import com.rafael.mardom.databinding.FragmentErrorBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

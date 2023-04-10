@@ -20,5 +20,4 @@ object RemoteDataModule {
         .addConverterFactory(GsonConverterFactory.create())
         .baseUrl(BASE_URL)
         .build()
-
 }
