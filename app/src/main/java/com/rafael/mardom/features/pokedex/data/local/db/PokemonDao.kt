@@ -14,9 +14,6 @@ interface PokemonDao {
     @Query("SELECT * FROM $TABLE_POKEMON WHERE $PK_POKEMON = :id")
     fun findById(id: Int): PokemonEntity?
 
-    @Query("SELECT * FROM $TABLE_POKEMON WHERE $NAME_POKEMON = :name")
-    fun findByName(name: String): PokemonEntity?
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(pokemonEntity: PokemonEntity)
 

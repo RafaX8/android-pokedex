@@ -37,7 +37,4 @@ class PokemonDataRepository @Inject constructor(
     }
 
     override suspend fun getById(id: Int): Either<ErrorApp, Pokemon?> = localDataSource.getById(id)
-
-    override suspend fun getByName(name: String): Either<ErrorApp, Pokemon?> = localDataSource.getByName(name)
-
 }

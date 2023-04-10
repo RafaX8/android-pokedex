@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.faltenreich.skeletonlayout.Skeleton
 import com.rafael.mardom.R
+import com.rafael.mardom.app.extensions.ColorTypePairing
 import com.rafael.mardom.app.extensions.loadUrl
 import com.rafael.mardom.app.presentation.error.AppErrorHandler
 import com.rafael.mardom.databinding.FragmentPokemonDetailBinding
@@ -57,14 +58,13 @@ class PokemonDetailFragment : Fragment() {
 
     private fun setupObservers() {
         val state = Observer<PokemonDetailViewModel.UiState> {
-            if (it.error != null) {
-                skeleton?.showOriginal()
-                appErrorHandler.navigateToError(it.error)
+            if (it.isLoading) {
+                skeleton?.showSkeleton()
             } else {
-                if (it.isLoading) {
-                    skeleton?.showSkeleton()
+                skeleton?.showOriginal()
+                if (it.error != null) {
+                    appErrorHandler.navigateToError(it.error)
                 } else {
-                    skeleton?.showOriginal()
                     it.pokemon?.let { model ->
                         bind(model)
                     }
@@ -76,49 +76,30 @@ class PokemonDetailFragment : Fragment() {
 
     private fun bind(model: PokemonDetail) {
         val context = requireContext()
-        val typeColorPair = mapOf<String, Int>(
-            "normal" to context.getColor(R.color.normal),
-            "fire" to context.getColor(R.color.fire),
-            "water" to context.getColor(R.color.water),
-            "electric" to context.getColor(R.color.electric),
-            "grass" to context.getColor(R.color.grass),
-            "ice" to context.getColor(R.color.ice),
-            "fighting" to context.getColor(R.color.fighting),
-            "poison" to context.getColor(R.color.poison),
-            "ground" to context.getColor(R.color.ground),
-            "flying" to context.getColor(R.color.flying),
-            "psychic" to context.getColor(R.color.psychic),
-            "bug" to context.getColor(R.color.bug),
-            "rock" to context.getColor(R.color.rock),
-            "ghost" to context.getColor(R.color.ghost),
-            "dragon" to context.getColor(R.color.dragon),
-            "dark" to context.getColor(R.color.dark),
-            "steel" to context.getColor(R.color.steel),
-            "fairy" to context.getColor(R.color.fairy),
-        )
+        val typeColorPair = ColorTypePairing.typeColorPair
 
         binding?.apply {
             pokemonDescription.text = "\"${model.description}\""
             pokemonHeight.text = model.height.toString()
             pokemonWeight.text = model.weight.toString()
-            pokemonSprite.loadUrl(model.sprites.front_default)
-            frontShiny.loadUrl(model.sprites.front_shiny)
-            backDefault.loadUrl(model.sprites.back_default)
-            backShiny.loadUrl(model.sprites.back_shiny)
+            pokemonSprite.loadUrl(model.sprites.frontDefault)
+            frontShiny.loadUrl(model.sprites.frontShiny)
+            backDefault.loadUrl(model.sprites.backDefault)
+            backShiny.loadUrl(model.sprites.backShiny)
 
             pokemonType1.apply {
                 val type1 = model.types[0]
                 text = type1
-                typeColorPair[type1]?.let { color ->
-                    background.setTint(color)
+                typeColorPair[type1]?.let { colorId ->
+                    background.setTint(context.getColor(colorId))
                 }
             }
             pokemonType2.apply {
                 if (model.types.size > 1) {
                     val type2 = model.types[1]
                     text = type2
-                    typeColorPair[type2]?.let { color ->
-                        pokemonType2.background.setTint(color)
+                    typeColorPair[type2]?.let { colorId ->
+                        background.setTint(context.getColor(colorId))
                     }
                     visibility = View.VISIBLE
                 } else {

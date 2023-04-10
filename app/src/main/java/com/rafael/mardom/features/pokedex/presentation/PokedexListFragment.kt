@@ -63,14 +63,13 @@ class PokedexListFragment : Fragment() {
 
     private fun setUpObservers() {
         val state = Observer<PokedexListViewModel.UiState> {
-            if (it.error != null) {
-                skeleton?.showOriginal()
-                appErrorHandler.navigateToError(it.error)
+            if (it.isLoading) {
+                skeleton?.showSkeleton()
             } else {
-                if (it.isLoading) {
-                    skeleton?.showSkeleton()
+                skeleton?.showOriginal()
+                if (it.error != null) {
+                    appErrorHandler.navigateToError(it.error)
                 } else {
-                    skeleton?.showOriginal()
                     pokedexListAdapter.submitList(it.pokedex)
                 }
             }

@@ -38,8 +38,8 @@ data class StatApiModel(
 )
 
 data class PokemonSpriteApiModel(
-    @SerializedName("front_default") val front_default: String,
-    @SerializedName("front_shiny") val front_shiny: String,
-    @SerializedName("back_default") val back_default: String,
-    @SerializedName("back_shiny") val back_shiny: String,
+    @SerializedName("front_default") val frontDefault: String,
+    @SerializedName("front_shiny") val frontShiny: String,
+    @SerializedName("back_default") val backDefault: String,
+    @SerializedName("back_shiny") val backShiny: String,
 )

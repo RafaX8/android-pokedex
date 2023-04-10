@@ -39,8 +39,8 @@ data class PokemonStatsEntity(
 @Entity(tableName = TABLE_SPRITE)
 data class PokemonSpriteEntity(
     @PrimaryKey
-    @ColumnInfo(name = PK_SPRITE) val front_default: String,
-    val front_shiny: String,
-    val back_default: String,
-    val back_shiny: String,
+    @ColumnInfo(name = PK_SPRITE) val frontDefault: String,
+    val frontShiny: String,
+    val backDefault: String,
+    val backShiny: String,
 )
