@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_pokedex_list">
 
         <action
-            android:id="@+id/action_to_adoptions_detail"
+            android:id="@+id/action_to_pokemon_detail"
             app:destination="@id/pokemon_detail_fragment" />
 
     </fragment>
@@ -27,6 +27,13 @@
             app:argType="integer"
             app:nullable="false" />
 
+        <action
+            android:id="@+id/action_to_pokedex"
+            app:destination="@id/pokedex_fragment" />
+
+        <action
+            android:id="@+id/action_to_pokemon_detail"
+            app:destination="@id/pokemon_detail_fragment" />
     </fragment>
 
     <fragment
