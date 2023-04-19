@@ -20,10 +20,10 @@ class AppErrorHandler @Inject constructor(@ActivityContext private val context: 
                     .navigate(NavGraphDirections.actionToDataError())
             is ErrorApp.NoInternetError ->
                 Navigation.findNavController(activity, navFragment)
-                    .navigate(NavGraphDirections.actionToDataError())
+                    .navigate(NavGraphDirections.actionToNointernetError())
             is ErrorApp.TimeOutError ->
                 Navigation.findNavController(activity, navFragment)
-                    .navigate(NavGraphDirections.actionToDataError())
+                    .navigate(NavGraphDirections.actionToServerError())
             else ->
                 Navigation.findNavController(activity, navFragment)
                     .navigate(NavGraphDirections.actionToUnknownError())
