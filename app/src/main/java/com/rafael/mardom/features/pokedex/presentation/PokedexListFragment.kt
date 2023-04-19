@@ -53,6 +53,11 @@ class PokedexListFragment : Fragment() {
             pokedexListAdapter.setOnClickItem { pokemonId ->
                 navigateToDetail(pokemonId)
             }
+            swipeRefreshLayout.apply {
+                setOnRefreshListener {
+                    viewModel.refresh()
+                }
+            }
         }
     }
 

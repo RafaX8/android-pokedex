@@ -40,7 +40,7 @@ class PokedexListViewModel @Inject constructor(
     }
 
     private fun errorState(errorApp: ErrorApp) {
-        currentUiState = currentUiState.copy(error = errorApp)
+        currentUiState = currentUiState.copy(error = errorApp, isLoading = false)
         _uiState.postValue(currentUiState)
     }
 
@@ -57,9 +57,15 @@ class PokedexListViewModel @Inject constructor(
         _uiState.postValue(currentUiState)
     }
 
+    fun refresh() {
+        viewModelScope.launch(Dispatchers.IO) {
+            loadPokedex()
+        }
+    }
+
     data class UiState(
         val error: ErrorApp? = null,
-        val isLoading: Boolean = true,
+        val isLoading: Boolean = false,
         val pokedex: List<ItemUiState>? = null,
     )
 
