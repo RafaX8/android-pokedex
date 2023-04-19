@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.faltenreich.skeletonlayout.Skeleton
-import com.rafael.mardom.R
 import com.rafael.mardom.app.extensions.ColorTypePairing
 import com.rafael.mardom.app.extensions.loadUrl
 import com.rafael.mardom.app.presentation.error.AppErrorHandler
@@ -43,7 +42,7 @@ class PokemonDetailFragment : Fragment() {
         binding?.apply {
             toolbar.apply {
                 setNavigationOnClickListener {
-                    findNavController().navigateUp()
+                    navigateToPokedex()
                 }
             }
             skeleton = skeletonDetail
@@ -112,6 +111,13 @@ class PokemonDetailFragment : Fragment() {
             }
 
             buildStatsChart(model.stats)
+
+            beforeAction.setOnClickListener {
+                navigateBefore(model.id)
+            }
+            nextAction.setOnClickListener {
+                navigateNext(model.id)
+            }
         }
     }
 
@@ -138,5 +144,25 @@ class PokemonDetailFragment : Fragment() {
             statsChart.animation.duration = animationDuration
             statsChart.animate(chartSet)
         }
+    }
+
+    private fun navigateToPokedex() {
+        findNavController().navigate(
+            PokemonDetailFragmentDirections.actionToPokedex()
+        )
+    }
+
+    private fun navigateBefore(pokemonId: Int) {
+        if (pokemonId > 1)
+            findNavController().navigate(
+                PokemonDetailFragmentDirections.actionToPokemonDetail(pokemonId - 1)
+            )
+    }
+
+    private fun navigateNext(pokemonId: Int) {
+        if (pokemonId < 151)
+            findNavController().navigate(
+                PokemonDetailFragmentDirections.actionToPokemonDetail(pokemonId + 1)
+            )
     }
 }

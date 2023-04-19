@@ -79,7 +79,7 @@ class PokedexListFragment : Fragment() {
 
     private fun navigateToDetail(pokemonId: Int) {
         findNavController().navigate(
-            PokedexListFragmentDirections.actionToAdoptionsDetail(pokemonId)
+            PokedexListFragmentDirections.actionToPokemonDetail(pokemonId)
         )
     }
 }
