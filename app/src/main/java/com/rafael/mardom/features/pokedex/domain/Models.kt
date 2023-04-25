@@ -22,3 +22,7 @@ data class PokemonSprite(
     val backDefault: String,
     val backShiny: String,
 )
+
+data class Favorite(
+    val id: Int
+)

@@ -1,5 +1,6 @@
 package com.rafael.mardom.features.pokedex.data.local.db
 
+import com.rafael.mardom.features.pokedex.domain.Favorite
 import com.rafael.mardom.features.pokedex.domain.Pokemon
 import com.rafael.mardom.features.pokedex.domain.PokemonSprite
 import com.rafael.mardom.features.pokedex.domain.PokemonStats
@@ -53,3 +54,7 @@ fun PokemonSprite.toEntity() = PokemonSpriteEntity(
     backDefault = this.backDefault,
     backShiny = this.backShiny,
 )
+
+fun Favorite.toEntity(): FavoriteEntity = FavoriteEntity(this.id)
+
+fun FavoriteEntity.toDomain(): Favorite = Favorite(this.id)

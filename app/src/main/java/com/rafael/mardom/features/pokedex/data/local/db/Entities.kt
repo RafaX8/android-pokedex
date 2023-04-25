@@ -15,6 +15,9 @@ const val PK_STATS = "pokemon_stats_id"
 const val TABLE_SPRITE = "pokemon_sprite"
 const val PK_SPRITE = "pokemon_sprite_id"
 
+const val TABLE_NAME_FAVORITE = "favorite"
+const val PK_NAME_FAVORITE = "favorite_id"
+
 @Entity(tableName = TABLE_POKEMON)
 data class PokemonEntity(
     @PrimaryKey
@@ -43,4 +46,11 @@ data class PokemonSpriteEntity(
     val frontShiny: String,
     val backDefault: String,
     val backShiny: String,
+)
+
+@Entity(tableName = TABLE_NAME_FAVORITE)
+data class FavoriteEntity(
+    @PrimaryKey
+    @ColumnInfo(name = PK_NAME_FAVORITE)
+    val id: Int,
 )
