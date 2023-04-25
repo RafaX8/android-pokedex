@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rafael.mardom.app.domain.ErrorApp
+import com.rafael.mardom.features.pokedex.domain.FilterFavoritesFeedUseCase
 import com.rafael.mardom.features.pokedex.domain.GetAllPokemonUseCase
 import com.rafael.mardom.features.pokedex.domain.GetAllPokemonUseCase.*
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PokedexListViewModel @Inject constructor(
-    private val getAllPokemonUseCase: GetAllPokemonUseCase
+    private val getAllPokemonUseCase: GetAllPokemonUseCase,
+    private val filterFavoritesFeedUseCase: FilterFavoritesFeedUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableLiveData<UiState>()
@@ -25,13 +27,26 @@ class PokedexListViewModel @Inject constructor(
     var currentUiState = UiState()
 
     private var jobPokedex: Job? = null
+    private var jobFavorites: Job? = null
 
     fun loadPokedex() {
-        jobPokedex?.cancel()
+        jobFavorites?.cancel()
         currentUiState = currentUiState.copy(isLoading = true)
         _uiState.postValue(currentUiState)
         jobPokedex = viewModelScope.launch(Dispatchers.IO) {
             getAllPokemonUseCase.invoke().fold({
+                errorState(it)
+            }, {
+                successState(it)
+            })
+        }
+    }
+    fun loadFavoritesPokedex() {
+        jobPokedex?.cancel()
+        currentUiState = currentUiState.copy(isLoading = true)
+        _uiState.postValue(currentUiState)
+        jobFavorites = viewModelScope.launch(Dispatchers.IO) {
+            filterFavoritesFeedUseCase.invoke().fold({
                 errorState(it)
             }, {
                 successState(it)
@@ -50,6 +65,7 @@ class PokedexListViewModel @Inject constructor(
             pokedex = pokedex.map { pokemon ->
                 ItemUiState(
                     pokemonItem = pokemon,
+                    isFavorite = pokemon.isFavorite
                 )
             },
             error = null
@@ -59,6 +75,14 @@ class PokedexListViewModel @Inject constructor(
 
     fun refresh() {
         viewModelScope.launch(Dispatchers.IO) {
+            reload()
+        }
+    }
+
+    private fun reload() {
+        if (currentUiState.areFavoritesLoaded) {
+            loadFavoritesPokedex()
+        } else {
             loadPokedex()
         }
     }
@@ -67,9 +91,11 @@ class PokedexListViewModel @Inject constructor(
         val error: ErrorApp? = null,
         val isLoading: Boolean = false,
         val pokedex: List<ItemUiState>? = null,
+        var areFavoritesLoaded: Boolean = false,
     )
 
     data class ItemUiState(
+        val isFavorite: Boolean,
         val pokemonItem: PokemonItem,
     )
 }

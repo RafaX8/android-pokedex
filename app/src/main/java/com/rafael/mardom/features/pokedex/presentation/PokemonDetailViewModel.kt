@@ -5,8 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rafael.mardom.app.domain.ErrorApp
+import com.rafael.mardom.features.pokedex.domain.DeleteFavoriteUseCase
 import com.rafael.mardom.features.pokedex.domain.GetPokemonByIdUseCase
 import com.rafael.mardom.features.pokedex.domain.GetPokemonByIdUseCase.*
+import com.rafael.mardom.features.pokedex.domain.SaveFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,7 +16,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PokemonDetailViewModel @Inject constructor(
-    private val getPokemonByIdUseCase: GetPokemonByIdUseCase
+    private val getPokemonByIdUseCase: GetPokemonByIdUseCase,
+    private val saveFavoriteUseCase: SaveFavoriteUseCase,
+    private val deleteFavoriteUseCase: DeleteFavoriteUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableLiveData<UiState>()
@@ -35,6 +39,18 @@ class PokemonDetailViewModel @Inject constructor(
                 _uiState.postValue(currentUiState)
             })
 
+        }
+    }
+
+    fun addToFavorite(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            saveFavoriteUseCase.invoke(id)
+        }
+    }
+
+    fun removeFromFavorite(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            deleteFavoriteUseCase.invoke(id)
         }
     }
 

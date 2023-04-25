@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.faltenreich.skeletonlayout.Skeleton
+import com.rafael.mardom.R
 import com.rafael.mardom.app.extensions.ColorTypePairing
 import com.rafael.mardom.app.extensions.loadUrl
 import com.rafael.mardom.app.presentation.error.AppErrorHandler
@@ -108,6 +109,14 @@ class PokemonDetailFragment : Fragment() {
 
             toolbar.apply {
                 title = "# ${model.id} - ${model.name.uppercase()}"
+                updateFavIcon(model.isFavorite)
+                favoriteAction.setOnClickListener {
+                    if (model.isFavorite) {
+                        unfavoriteSelected()
+                    } else {
+                        favoriteSelected()
+                    }
+                }
             }
 
             buildStatsChart(model.stats)
@@ -120,6 +129,27 @@ class PokemonDetailFragment : Fragment() {
             }
         }
     }
+
+    private fun updateFavIcon(isFavorite: Boolean) {
+        binding?.apply {
+            toolbar.apply {
+                favoriteAction.setImageResource(
+                    if (isFavorite) R.drawable.ic_favorite_fill else R.drawable.ic_favorite
+                )
+            }
+        }
+    }
+
+    private fun favoriteSelected() {
+        updateFavIcon(true)
+        viewModel.addToFavorite(args.pokemonId)
+    }
+
+    private fun unfavoriteSelected() {
+        updateFavIcon(false)
+        viewModel.removeFromFavorite(args.pokemonId)
+    }
+
 
     private fun buildStatsChart(stats: List<PokemonDetailStats>) {
         val animationDuration = 1000L

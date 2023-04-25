@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Icons -->
+    <dimen name="ic_favorite">48dp</dimen>
+
     <!-- Sprites -->
     <!-- List -->
     <dimen name="pokedex_sprite_size">56dp</dimen>

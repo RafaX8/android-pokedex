@@ -19,7 +19,17 @@
         app:navigationIconTint="@color/md_theme_light_onPrimary"
         app:titleCentered="true"
         app:titleTextColor="@color/md_theme_light_onSecondary"
-        tools:title="# 0 - PIKACHU" />
+        tools:title="# 0 - PIKACHU">
+
+        <ImageView
+            android:id="@+id/favorite_action"
+            android:layout_width="@dimen/ic_favorite"
+            android:layout_height="@dimen/ic_favorite"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/spacing_medium"
+            tools:src="@drawable/ic_favorite" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <!-- ScrollView -->
     <androidx.core.widget.NestedScrollView
