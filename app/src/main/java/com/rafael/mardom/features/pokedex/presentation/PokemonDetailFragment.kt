@@ -43,7 +43,7 @@ class PokemonDetailFragment : Fragment() {
         binding?.apply {
             toolbar.apply {
                 setNavigationOnClickListener {
-                    findNavController().navigateUp()
+                    navigateToPokedex()
                 }
             }
             skeleton = skeletonDetail
@@ -109,11 +109,47 @@ class PokemonDetailFragment : Fragment() {
 
             toolbar.apply {
                 title = "# ${model.id} - ${model.name.uppercase()}"
+                updateFavIcon(model.isFavorite)
+                favoriteAction.setOnClickListener {
+                    if (model.isFavorite) {
+                        unfavoriteSelected()
+                    } else {
+                        favoriteSelected()
+                    }
+                }
             }
 
             buildStatsChart(model.stats)
+
+            beforeAction.setOnClickListener {
+                navigateBefore(model.id)
+            }
+            nextAction.setOnClickListener {
+                navigateNext(model.id)
+            }
         }
     }
+
+    private fun updateFavIcon(isFavorite: Boolean) {
+        binding?.apply {
+            toolbar.apply {
+                favoriteAction.setImageResource(
+                    if (isFavorite) R.drawable.ic_favorite_fill else R.drawable.ic_favorite
+                )
+            }
+        }
+    }
+
+    private fun favoriteSelected() {
+        updateFavIcon(true)
+        viewModel.addToFavorite(args.pokemonId)
+    }
+
+    private fun unfavoriteSelected() {
+        updateFavIcon(false)
+        viewModel.removeFromFavorite(args.pokemonId)
+    }
+
 
     private fun buildStatsChart(stats: List<PokemonDetailStats>) {
         val animationDuration = 1000L
@@ -138,5 +174,25 @@ class PokemonDetailFragment : Fragment() {
             statsChart.animation.duration = animationDuration
             statsChart.animate(chartSet)
         }
+    }
+
+    private fun navigateToPokedex() {
+        findNavController().navigate(
+            PokemonDetailFragmentDirections.actionToPokedex()
+        )
+    }
+
+    private fun navigateBefore(pokemonId: Int) {
+        if (pokemonId > 1)
+            findNavController().navigate(
+                PokemonDetailFragmentDirections.actionToPokemonDetail(pokemonId - 1)
+            )
+    }
+
+    private fun navigateNext(pokemonId: Int) {
+        if (pokemonId < 151)
+            findNavController().navigate(
+                PokemonDetailFragmentDirections.actionToPokemonDetail(pokemonId + 1)
+            )
     }
 }

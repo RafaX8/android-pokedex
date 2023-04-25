@@ -11,10 +11,14 @@
         tools:layout="@layout/fragment_pokedex_list">
 
         <action
-            android:id="@+id/action_to_adoptions_detail"
+            android:id="@+id/action_to_pokemon_detail"
             app:destination="@id/pokemon_detail_fragment" />
 
     </fragment>
+
+    <action
+        android:id="@+id/action_to_pokedex"
+        app:destination="@id/pokedex_fragment" />
 
     <fragment
         android:id="@+id/pokemon_detail_fragment"
@@ -27,7 +31,15 @@
             app:argType="integer"
             app:nullable="false" />
 
+        <action
+            android:id="@+id/action_to_pokemon_detail"
+            app:destination="@id/pokemon_detail_fragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/error_fragment"
+        android:name="com.rafael.mardom.app.presentation.error.ErrorFragment"
+        tools:layout="@layout/fragment_error" />
 
     <fragment
         android:id="@+id/data_error_fragment"

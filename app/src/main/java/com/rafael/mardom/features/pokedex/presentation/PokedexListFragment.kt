@@ -40,7 +40,15 @@ class PokedexListFragment : Fragment() {
 
     private fun setupView() {
         binding?.apply {
-            viewModel.loadPokedex()
+            toolbar.apply {
+                favoriteAction.setOnClickListener {
+                    if (!(viewModel.currentUiState.areFavoritesLoaded)) {
+                        showFavourites()
+                    } else {
+                        showUnfavourites()
+                    }
+                }
+            }
             pokedexList.apply {
                 adapter = pokedexListAdapter
                 layoutManager = LinearLayoutManager(
@@ -53,12 +61,48 @@ class PokedexListFragment : Fragment() {
             pokedexListAdapter.setOnClickItem { pokemonId ->
                 navigateToDetail(pokemonId)
             }
+            swipeRefreshLayout.apply {
+                setOnRefreshListener {
+                    viewModel.refresh()
+                }
+            }
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpObservers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (viewModel.currentUiState.areFavoritesLoaded) {
+            showFavourites()
+        } else {
+            showUnfavourites()
+        }
+    }
+
+    private fun showFavourites() {
+        viewModel.currentUiState.areFavoritesLoaded = true
+        updateFavIcon(true)
+        viewModel.loadFavoritesPokedex()
+    }
+
+    private fun showUnfavourites() {
+        viewModel.currentUiState.areFavoritesLoaded = false
+        updateFavIcon(false)
+        viewModel.loadPokedex()
+    }
+
+    private fun updateFavIcon(isFavorite: Boolean) {
+        binding?.apply {
+            toolbar.apply {
+                favoriteAction.setImageResource(
+                    if (isFavorite) R.drawable.ic_favorite_fill else R.drawable.ic_favorite
+                )
+            }
+        }
     }
 
     private fun setUpObservers() {
@@ -72,6 +116,7 @@ class PokedexListFragment : Fragment() {
                 } else {
                     pokedexListAdapter.submitList(it.pokedex)
                 }
+                binding?.swipeRefreshLayout?.isRefreshing = false
             }
         }
         viewModel.uiState.observe(viewLifecycleOwner, state)
@@ -79,7 +124,7 @@ class PokedexListFragment : Fragment() {
 
     private fun navigateToDetail(pokemonId: Int) {
         findNavController().navigate(
-            PokedexListFragmentDirections.actionToAdoptionsDetail(pokemonId)
+            PokedexListFragmentDirections.actionToPokemonDetail(pokemonId)
         )
     }
 }

@@ -5,25 +5,27 @@ import com.rafael.mardom.app.domain.functional.Either
 import javax.inject.Inject
 
 class GetPokemonByIdUseCase @Inject constructor(
-    private val pokemonRepository: PokemonRepository
+    private val pokemonRepository: PokemonRepository,
+    private val favoriteRepository: FavoriteRepository
 ) {
     suspend operator fun invoke(pokemonId: Int): Either<ErrorApp, PokemonDetail?> =
         pokemonRepository.getById(pokemonId).map {
-            it?.let { Pokemon ->
+            it?.let { pokemon ->
                 PokemonDetail(
-                    id = Pokemon.id,
-                    name = Pokemon.name,
-                    description = Pokemon.description,
-                    height = Pokemon.height,
-                    weight = Pokemon.weight,
-                    types = Pokemon.types,
-                    stats = Pokemon.stats.map { stat ->
+                    id = pokemon.id,
+                    name = pokemon.name,
+                    description = pokemon.description,
+                    height = pokemon.height,
+                    weight = pokemon.weight,
+                    types = pokemon.types,
+                    stats = pokemon.stats.map { stat ->
                         PokemonDetailStats(
                             name = stat.name,
                             base = stat.base
                         )
                     },
-                    sprites = Pokemon.sprites
+                    sprites = pokemon.sprites,
+                    isFavorite = (favoriteRepository.getById(pokemon.id) != null)
                 )
             }
         }
@@ -37,6 +39,7 @@ class GetPokemonByIdUseCase @Inject constructor(
         val types: List<String>,
         val stats: List<PokemonDetailStats>,
         val sprites: PokemonSprite,
+        val isFavorite: Boolean
     )
 
     data class PokemonDetailStats(

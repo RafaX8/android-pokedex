@@ -19,7 +19,17 @@
         app:navigationIconTint="@color/md_theme_light_onPrimary"
         app:titleCentered="true"
         app:titleTextColor="@color/md_theme_light_onSecondary"
-        tools:title="# 0 - PIKACHU" />
+        tools:title="# 0 - PIKACHU">
+
+        <ImageView
+            android:id="@+id/favorite_action"
+            android:layout_width="@dimen/ic_favorite"
+            android:layout_height="@dimen/ic_favorite"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/spacing_medium"
+            tools:src="@drawable/ic_favorite" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <!-- ScrollView -->
     <androidx.core.widget.NestedScrollView
@@ -218,9 +228,30 @@
                     app:chart_barsColor="@color/md_theme_dark_tertiary"
                     app:chart_labelsColor="@color/md_theme_light_onSecondary"
                     app:chart_labelsSize="@dimen/font_small"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/before_action"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/before_action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/md_theme_light_background"
+                    android:src="@drawable/ic_navigate_before"
+                    app:layout_constraintStart_toStartOf="@id/stats_chart"
+                    app:layout_constraintTop_toBottomOf="@id/stats_chart"
+                    app:tint="@color/md_theme_light_primary" />
+
+                <ImageButton
+                    android:id="@+id/next_action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/md_theme_light_background"
+                    android:src="@drawable/ic_navigate_next"
+                    app:layout_constraintEnd_toEndOf="@id/stats_chart"
+                    app:layout_constraintTop_toBottomOf="@id/stats_chart"
+                    app:tint="@color/md_theme_light_primary" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.faltenreich.skeletonlayout.SkeletonLayout>
     </androidx.core.widget.NestedScrollView>
