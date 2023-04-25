@@ -1,10 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".features.pokedex.presentation.PokedexListFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/collapsingToolbarLayoutMediumSize">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/md_theme_light_primary"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            app:subtitle="@string/app_name"
+            app:subtitleTextColor="@color/white"
+            app:title="@string/action_bar_tittle"
+            app:titleTextColor="@color/md_theme_light_onSecondary">
+
+            <ImageView
+                android:id="@+id/favorite_action"
+                android:layout_width="@dimen/ic_favorite"
+                android:layout_height="@dimen/ic_favorite"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/spacing_medium"
+                tools:src="@drawable/ic_favorite"/>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
@@ -19,4 +46,4 @@
             tools:listitem="@layout/view_item_pokedex_pokemon" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-</FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
